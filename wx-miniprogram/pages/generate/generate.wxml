@@ -1,0 +1,15 @@
+<!--pages/generate/generate.wxml-->
+<view class='center'>
+  <image class='touxiang' src='{{userInfo.avatarUrl}}'></image>
+  <view class='name'>{{userInfo.nickname}}</view>
+  <view class='hongBao'>
+    <image src='{{imgSrc}}'></image>
+    <view class='je'>
+      <view class='number'>{{money}}</view>
+      元
+      <view class='geshu'>共{{gs}}个红包</view>
+      <view class='speak'>{{kl}}</view>
+    </view>
+  </view>
+  <button class='btn' open-type='share'>分享给好友或群</button>
+</view>

@@ -1,0 +1,18 @@
+/* pages/muban/muban.wxss */
+page {
+  width: 100%;
+  height: 100%;
+}
+.hb {
+
+}
+.hb > image {
+
+  float: left;
+  width: 272rpx;
+  height: 408rpx;
+  display: inline-block;
+  margin-top: 48rpx;
+  margin-left: 48rpx;
+  margin-bottom: 48rpx;
+}

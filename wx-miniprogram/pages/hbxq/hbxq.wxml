@@ -1,0 +1,30 @@
+<!--pages/hbxq/hbxq.wxml-->
+<view class='center'>
+  <image class='touxiang' src='{{hbUserInfo.avatarUrl}}'></image>
+  <view class='name'>{{hbUserInfo.nickname}}的红包</view>
+  <view class='money'>
+    <view class='moneyN'>{{lqje}}</view>
+    元
+  </view>
+  <view class='content'>
+    <view class='number'>共{{gs}}个红包，已领取{{lqgs}}个</view>
+    <view class='table' wx:for="{{lqjl}}" wx:key="content" wx:for-index="key">
+      <view class='tbody' data-index='{{key}}'>
+        <image src='{{item.redEnvelopeUser.avatarUrl}}'></image>
+        <view class='right'>
+          <view class='renName'>{{item.redEnvelopeUser.nickname}}</view>
+          <view class='time'>{{item.createTime}}</view>
+          <view class='hbMoney'>{{item.fee}}元</view>
+        </view>
+      </view>
+      <!-- <view class='tbody'>
+        <image src='../image/touxiang.png'></image>
+        <view class='right'>
+          <view class='renName'>掌中互联</view>
+          <view class='time'>2018.2.15 10:18</view>
+          <view class='hbMoney'>88.00元</view>
+        </view>
+      </view> -->
+    </view>
+  </view>
+</view>

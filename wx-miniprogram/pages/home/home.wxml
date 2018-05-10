@@ -1,0 +1,30 @@
+<!--pages/home/home.wxml-->
+<wxs module="filters" src="./home.wxs"></wxs>
+<view class='center'>
+  <view hidden='{{tip == "" ? true : false}}' class='tip'>{{tip}}</view>
+  <image class='tx' src='{{userInfo.avatarUrl}}'></image>
+  <view class='name'>{{userInfo.nickname}}</view>
+  <view class='hb'>
+    <image class='envelopes' bindtap='fd' src='{{imgSrc}}'></image>
+    <view class='muBan' bindtap='muban'>红包模板>></view>
+  </view>
+  <form bindsubmit="formSubmit">
+    <view class='inp1'>
+      <label>添加祝福</label>
+      <input type='text' name='kl' value='{{kl}}' bindinput='getKl' placeholder='{{mrkl}}' placeholder-class='placeholer'></input>
+    </view>
+     <view class='inp2'>
+      <label>红包数量</label>
+      <input type='number' name="gs" value='{{gs == 0 ? "" : gs}}' bindinput ="getGs" placeholder='填写数量' placeholder-class='placeholer'></input>
+    </view>
+     <view class='inp3'>
+      <label>红包金额</label>
+      <input type='number' name='hbje' value='{{hbje == 0 ? "" : hbje}}' bindinput ="getHbje" placeholder='填写金额' placeholder-class='placeholer'></input>
+    </view>
+    <view class='pay'>需支付￥{{filters.toFix(hbje * fwfl)}}元服务费</view>
+     <button class='btn' formType="submit">生成红包</button>     
+  </form>
+</view>
+<view class='model' hidden='{{modeHid}}' bindtap='modeBind'>
+  <image src='{{imgSrc}}'></image>
+</view>

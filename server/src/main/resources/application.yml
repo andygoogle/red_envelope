@@ -1,0 +1,80 @@
+server:
+  port: 9080
+
+red-envelope:
+  serviceFeeRate: 0.02
+  # 是否启动定时任务 0-不启动，1-启动
+  enableScheduledTask: 1
+  # 模板文件路径
+  filePath: /Users/yaojunjian/ZZHL/git/red_envelope-server/
+
+spring:
+  application:
+    name: red-envelope-server
+
+  profiles:
+    active: dev
+
+  datasource:
+    type: org.apache.commons.dbcp2.BasicDataSource
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://120.27.93.200:3306/red_envelope?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&autoReconnect=true&failOverReadOnly=false
+    username: mapoer
+    password: t-ephe?tad#Th4PhekubreBE
+
+    dbcp2:
+      # 连接初始值，连接池启动时创建的连接数量的初始值  默认值是0 -->
+      initial-size: 10
+      # 最小空闲值.当空闲的连接数少于阀值时，连接池就会预申请去一些连接，以免洪峰来时来不及申请  默认值是0 -->
+      min-idle: 10
+      # 最大空闲值.当经过一个高峰时间后，连接池可以慢慢将已经用不到的连接慢慢释放一部分，一直减少到maxIdle为止 ，0时无限制  默认值是8 -->
+      max-idle: 80
+      # 连接池的最大值，同一时间可以从池分配的最多连接数量，0时无限制   默认值是8 -->
+      max-total: 80
+      max-wait-millis: 10000
+      # 默认 true
+      test-on-borrow: true
+      # 默认 false
+      test-on-return: false
+      # 默认 false
+      test-on-create: false
+      # 默认 false
+      remove-abandoned-on-borrow: false
+      validation-query: select 1
+      min-evictable-idle-time-millis: 3600000
+      time-between-eviction-runs-millis: 3600000
+      test-while-idle: true
+
+  redis:
+    database: 2
+    host: 120.27.19.15
+    port: 6379
+    password: 123456
+    pool:
+      max-active: 8
+      max-wait: 1
+      max-idle: 8
+      min-idle: 0
+    timeout: 0
+
+mybatis:
+  mapper:
+    basePackage: com.zzhl.domain.mapper
+  typeAliasesPackage: com.zzhl.domain.pojo
+
+# 微信相关配置信息，包含小程序、商户平台、公众号、支付设置
+wechat:
+  miniProgram:
+    appId: wxfde6c07df452780f
+    secret: 5b9ee9b4c57655c04cfad7838809198d
+  merchantPlatform:
+    mchId: 1492589782
+    apiKey: sdjfk89dsJKL54hLJL90NzvfR6ydCFBk
+  openPlatform:
+    appId: wxbd2a0deddc8bf6f2
+    noticeToken: ZZHL888888
+    noticeEncodingAesKey: G11nVfV3Narx4UxBkEuYniOJkjWDnlXuVqaeKU4XY9H
+  pay:
+    notifyUrl: https://www.mapoer.net/mds/wechat/pay/notify
+    spbillCreateIp: 120.27.93.200
+    tradeType: JSAPI

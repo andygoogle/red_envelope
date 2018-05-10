@@ -1,0 +1,13 @@
+<!--pages/problem/problem.wxml-->
+<view class='center' wx:for="{{list}}" wx:key="content" wx:for-index="key">
+  <view class='pro' style="opacity: {{item.opacity}};" data-index='{{key}}' bindtap='hiddenBtn'>
+    <label>{{item.id}}</label>
+  </view>
+  <view class='cenHidden' hidden='{{item.hidden}}'>
+    <view class='answer'>
+      <label class='ansLab'>{{item.con}}</label>
+    </view>
+  </view>
+  <view class='line_bottom'></view>
+</view>
+<button class='btn' type="primary" size="default" open-type='contact' bindtap='doSend'>联系在线客服</button>

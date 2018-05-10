@@ -1,0 +1,4 @@
+<!--pages/muban/muban.wxml-->
+<view class='hb' wx:for="{{list}}" wx:key="content" wx:for-index="key">
+  <image src='{{item.url}}' data-src='{{item.url}}' data-index='{{item.id}}' bindtap='hbxx'></image>
+</view>

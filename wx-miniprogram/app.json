@@ -1,0 +1,48 @@
+{
+  "pages": [
+    "pages/home/home",
+    "pages/balance/balance",
+    "pages/problem/problem",
+    "pages/muban/muban",
+    "pages/generate/generate",
+    "pages/meHb/meHb",
+    "pages/into/into",
+    "pages/hbxq/hbxq"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#ff3333",
+    "navigationBarTitleText": "红包 ",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "selectedColor": "#ff3333",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "首页",
+        "iconPath": "pages/image/homeW.png",
+        "selectedIconPath": "pages/image/homeZ.png"
+      },
+      {
+        "pagePath": "pages/meHb/meHb",
+        "text": "我的红包",
+        "iconPath": "pages/image/hongBaoW.png",
+        "selectedIconPath": "pages/image/hongBaoZ.png"
+      },
+      {
+        "pagePath": "pages/balance/balance",
+        "text": "余额提现",
+        "iconPath": "pages/image/yueW.png",
+        "selectedIconPath": "pages/image/yueZ.png"
+      },
+      {
+        "pagePath": "pages/problem/problem",
+        "text": "常见问题",
+        "iconPath": "pages/image/problemW.png",
+        "selectedIconPath": "pages/image/problemZ.png"
+      }
+    ]
+  }
+}

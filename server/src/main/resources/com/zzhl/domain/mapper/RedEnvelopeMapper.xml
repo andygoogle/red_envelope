@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zzhl.domain.mapper.RedEnvelopeMapper" >
+  <resultMap id="BaseResultMap" type="com.zzhl.domain.pojo.RedEnvelope" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="uid" property="uid" jdbcType="INTEGER" />
+    <result column="template_id" property="templateId" jdbcType="INTEGER" />
+    <result column="command_text" property="commandText" jdbcType="VARCHAR" />
+    <result column="number" property="number" jdbcType="INTEGER" />
+    <result column="fee" property="fee" jdbcType="INTEGER" />
+    <result column="service_fee" property="serviceFee" jdbcType="INTEGER" />
+    <result column="is_finish" property="isFinish" jdbcType="TINYINT" />
+    <result column="receive_number" property="receiveNumber" jdbcType="INTEGER" />
+    <result column="receive_fee" property="receiveFee" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="create_time" property="createTime" jdbcType="BIGINT" />
+    <result column="modify_time" property="modifyTime" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, uid, template_id, command_text, number, fee, service_fee, is_finish, receive_number, 
+    receive_fee, status, create_time, modify_time
+  </sql>
+
+  <select id="listByUid" resultType="com.zzhl.domain.pojo.MyRedEnvelope">
+    select id, uid, template_id as templateId, command_text as commandText, number, fee, service_fee as serviceFee, is_finish as isFinish, receive_number as receiveNumber,
+    receive_fee as receiveFee, status, create_time as createTime, modify_time as modifyTime
+    from red_envelope
+    where uid = #{uid,jdbcType=INTEGER}
+    order by id desc
+    limit #{offset}, #{limit}
+  </select>
+
+  <select id="countByUid" resultType="com.zzhl.domain.pojo.MyRedEnvelope">
+    select count(id) as myNumber, sum(fee) as myFee
+    from red_envelope
+    where uid = #{uid,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from red_envelope
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from red_envelope
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zzhl.domain.pojo.RedEnvelope" useGeneratedKeys="true" keyProperty="id" >
+    insert into red_envelope (uid, template_id, command_text, 
+      number, fee, service_fee, 
+      is_finish, receive_number, receive_fee, 
+      status, create_time, modify_time
+      )
+    values (#{uid,jdbcType=INTEGER}, #{templateId,jdbcType=INTEGER}, #{commandText,jdbcType=VARCHAR}, 
+      #{number,jdbcType=INTEGER}, #{fee,jdbcType=INTEGER}, #{serviceFee,jdbcType=INTEGER}, 
+      #{isFinish,jdbcType=TINYINT}, #{receiveNumber,jdbcType=INTEGER}, #{receiveFee,jdbcType=INTEGER}, 
+      #{status,jdbcType=TINYINT}, #{createTime,jdbcType=BIGINT}, #{modifyTime,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zzhl.domain.pojo.RedEnvelope" useGeneratedKeys="true" keyProperty="id" >
+    insert into red_envelope
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="templateId != null" >
+        template_id,
+      </if>
+      <if test="commandText != null" >
+        command_text,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="fee != null" >
+        fee,
+      </if>
+      <if test="serviceFee != null" >
+        service_fee,
+      </if>
+      <if test="isFinish != null" >
+        is_finish,
+      </if>
+      <if test="receiveNumber != null" >
+        receive_number,
+      </if>
+      <if test="receiveFee != null" >
+        receive_fee,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="modifyTime != null" >
+        modify_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uid != null" >
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="templateId != null" >
+        #{templateId,jdbcType=INTEGER},
+      </if>
+      <if test="commandText != null" >
+        #{commandText,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="fee != null" >
+        #{fee,jdbcType=INTEGER},
+      </if>
+      <if test="serviceFee != null" >
+        #{serviceFee,jdbcType=INTEGER},
+      </if>
+      <if test="isFinish != null" >
+        #{isFinish,jdbcType=TINYINT},
+      </if>
+      <if test="receiveNumber != null" >
+        #{receiveNumber,jdbcType=INTEGER},
+      </if>
+      <if test="receiveFee != null" >
+        #{receiveFee,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="modifyTime != null" >
+        #{modifyTime,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zzhl.domain.pojo.RedEnvelope" >
+    update red_envelope
+    <set >
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="templateId != null" >
+        template_id = #{templateId,jdbcType=INTEGER},
+      </if>
+      <if test="commandText != null" >
+        command_text = #{commandText,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        number = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="fee != null" >
+        fee = #{fee,jdbcType=INTEGER},
+      </if>
+      <if test="serviceFee != null" >
+        service_fee = #{serviceFee,jdbcType=INTEGER},
+      </if>
+      <if test="isFinish != null" >
+        is_finish = #{isFinish,jdbcType=TINYINT},
+      </if>
+      <if test="receiveNumber != null" >
+        receive_number = #{receiveNumber,jdbcType=INTEGER},
+      </if>
+      <if test="receiveFee != null" >
+        receive_fee = #{receiveFee,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="modifyTime != null" >
+        modify_time = #{modifyTime,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zzhl.domain.pojo.RedEnvelope" >
+    update red_envelope
+    set uid = #{uid,jdbcType=INTEGER},
+      template_id = #{templateId,jdbcType=INTEGER},
+      command_text = #{commandText,jdbcType=VARCHAR},
+      number = #{number,jdbcType=INTEGER},
+      fee = #{fee,jdbcType=INTEGER},
+      service_fee = #{serviceFee,jdbcType=INTEGER},
+      is_finish = #{isFinish,jdbcType=TINYINT},
+      receive_number = #{receiveNumber,jdbcType=INTEGER},
+      receive_fee = #{receiveFee,jdbcType=INTEGER},
+      status = #{status,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=BIGINT},
+      modify_time = #{modifyTime,jdbcType=BIGINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

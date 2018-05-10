@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true" scan="true" scanPeriod="30 seconds">
+    <include resource="org/springframework/boot/logging/logback/defaults.xml" />
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml" />
+
+    <!--<property name="LOG_FILE" value="/data/mahjong/logs" />-->
+    <property name="LOG_FILE" value="logs" />
+
+    <springProfile name="dev">
+        <logger name="org.mybatis" level="DEBUG"/>
+        <logger name="com.zzhl" level="DEBUG"/>
+
+        <root level="debug">
+            <appender-ref ref="CONSOLE" />
+        </root>
+    </springProfile>
+
+    <springProfile name="test">
+        <appender name="TEST-FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <encoder>
+                <pattern>[%-5level] %d{HH:mm:ss.SSS} [%thread] %logger{36} - %msg%n</pattern>
+            </encoder>
+            <file>${LOG_FILE}/mahjong-server.log</file>
+            <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+                <fileNamePattern>${LOG_FILE}/mahjong_%d{yyyy-MM-dd}-%i.log</fileNamePattern>
+                <maxFileSize>100mb</maxFileSize>
+            </rollingPolicy>
+        </appender>
+
+        <logger name="org.mybatis" level="DEBUG"/>
+        <logger name="com.zzhl" level="DEBUG"/>
+
+        <root level="info">
+            <appender-ref ref="TEST-FILE" />
+        </root>
+    </springProfile>
+
+    <springProfile name="prod">
+        <appender name="PROD_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <encoder>
+                <pattern>[%-5level] %d{HH:mm:ss.SSS} [%thread] %logger{36} - %msg%n</pattern>
+            </encoder>
+            <file>${LOG_FILE}/mahjong-server.log</file>
+            <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+                <fileNamePattern>${LOG_FILE}/mahjong_%d{yyyy-MM-dd}-%i.log</fileNamePattern>
+                <maxFileSize>100mb</maxFileSize>
+            </rollingPolicy>
+        </appender>
+
+        <logger name="org.mybatis" level="DEBUG"/>
+        <logger name="com.zzhl" level="DEBUG"/>
+
+        <root level="warn">
+            <appender-ref ref="PROD_FILE" />
+        </root>
+    </springProfile>
+
+</configuration>

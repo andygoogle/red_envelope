@@ -1,0 +1,14 @@
+<!--pages/into/into.wxml-->
+<view class='center'>
+  <image class='touxiang' src='../image/touxiang.png'></image>
+  <view class='name'>掌中互联的红包</view>
+  <view class='hongBao' bindtap='ling'>
+    <image src='../image/HB1-W.jpg'></image>
+    <view class='je'>
+      <view class='number'>888</view>
+      元
+      <view class='geshu'>共5个红包</view>
+      <view class='speak'>新年快乐</view>
+    </view>
+  </view>
+</view>

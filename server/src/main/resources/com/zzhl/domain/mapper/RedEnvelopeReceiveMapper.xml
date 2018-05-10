@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zzhl.domain.mapper.RedEnvelopeReceiveMapper" >
+  <resultMap id="BaseResultMap" type="com.zzhl.domain.pojo.RedEnvelopeReceive" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="uid" property="uid" jdbcType="INTEGER" />
+    <result column="red_envelope_id" property="redEnvelopeId" jdbcType="INTEGER" />
+    <result column="fee" property="fee" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, uid, red_envelope_id, fee, create_time
+  </sql>
+
+  <select id="countByUid" resultType="com.zzhl.domain.pojo.MyRedEnvelope">
+    select count(id) as myNumber, sum(fee) as myFee
+    from red_envelope_receive
+    where uid = #{uid,jdbcType=INTEGER}
+  </select>
+
+  <select id="listByUid" resultType="com.zzhl.domain.pojo.MyRedEnvelope">
+    select a.id, a.uid, a.template_id as templateId, a.command_text as commandText, a.number, b.fee, a.is_finish as isFinish, a.receive_number as receiveNumber,
+    a.receive_fee as receiveFee, b.create_time as createTime
+    from red_envelope a inner join red_envelope_receive b on a.id = b.red_envelope_id
+    where b.uid = #{uid,jdbcType=INTEGER}
+    order by b.id desc
+    limit #{offset}, #{limit}
+  </select>
+
+  <select id="selectByUidOrReid" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    from red_envelope_receive
+    where 1 = 1
+    <if test="uid != null"> and uid = #{uid,jdbcType=INTEGER} </if>
+    <if test="redEnvelopeId != null"> and red_envelope_id = #{redEnvelopeId,jdbcType=INTEGER} </if>
+    order by id desc
+    limit #{offset,jdbcType=INTEGER}, #{limit,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from red_envelope_receive
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from red_envelope_receive
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zzhl.domain.pojo.RedEnvelopeReceive" useGeneratedKeys="true" keyProperty="id" >
+    insert into red_envelope_receive (uid, red_envelope_id, fee, 
+      create_time)
+    values (#{uid,jdbcType=INTEGER}, #{redEnvelopeId,jdbcType=INTEGER}, #{fee,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zzhl.domain.pojo.RedEnvelopeReceive" useGeneratedKeys="true" keyProperty="id" >
+    insert into red_envelope_receive
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="redEnvelopeId != null" >
+        red_envelope_id,
+      </if>
+      <if test="fee != null" >
+        fee,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uid != null" >
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="redEnvelopeId != null" >
+        #{redEnvelopeId,jdbcType=INTEGER},
+      </if>
+      <if test="fee != null" >
+        #{fee,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zzhl.domain.pojo.RedEnvelopeReceive" >
+    update red_envelope_receive
+    <set >
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="redEnvelopeId != null" >
+        red_envelope_id = #{redEnvelopeId,jdbcType=INTEGER},
+      </if>
+      <if test="fee != null" >
+        fee = #{fee,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zzhl.domain.pojo.RedEnvelopeReceive" >
+    update red_envelope_receive
+    set uid = #{uid,jdbcType=INTEGER},
+      red_envelope_id = #{redEnvelopeId,jdbcType=INTEGER},
+      fee = #{fee,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=BIGINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

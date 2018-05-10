@@ -1,0 +1,89 @@
+/* pages/meHb/meHb.wxss */
+.swiper-tab{  
+    width: 100%;    
+    text-align: center;  
+    line-height: 80rpx;
+    box-shadow: 2rpx 0 36rpx rgba(0, 0, 0, 0.16)
+    }  
+.swiper-tab-list{  font-size: 30rpx;  
+    display: inline-block;  
+    width: 50%;  
+    color: #777777;  
+}  
+.on{ color: #da7c0c;  
+    border-bottom: 5rpx solid #ff6666;}  
+  
+.swiper-box{ 
+  display: block;
+  height: 100%;
+  width: 100%; 
+  overflow: hidden;
+  background-color: #f6f7fc;
+  }
+  .cen1 {
+    text-align: center;
+  }  
+.userinfo {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  border: 8rpx solid #fff;
+  margin: 44rpx auto;
+}
+.userinfo-nickname {
+  font-size: 28rpx;
+  color: #999;
+  margin-top: 32rpx;
+  display: block;
+}
+.info {
+  font-size: 32rpx;
+  color: #333;
+  font-weight: bold;
+  margin-top: 28rpx;
+}
+.hbxq {
+  width: 100%;
+  height: 120rpx;
+  background-color: #fff;
+  margin-top: 48rpx;
+  position: relative;
+}
+.tip {
+  position: absolute;
+  top: 24rpx;
+  left: 32rpx;
+  font-size: 28rpx;
+  color: #333;
+  display: inline-block;
+  width: 60%;
+  text-align: left;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.time {
+  color: #999;
+  font-size: 24rpx;
+  position: absolute;
+  top: 64rpx;
+  left: 32rpx;
+}
+.number {
+  position: absolute;
+  top: 24rpx;
+  right: 32rpx;
+}
+.num1 {
+  font-size: 28rpx;
+  color: #333;
+}
+.num2 {
+  font-size: 24rpx;
+  color: #999;
+}
+.problem {
+  margin-top: 48rpx;
+  font-size: 28rpx;
+  color: #586c94;
+}

@@ -1,0 +1,50 @@
+<!--pages/meHb/meHb.wxml-->
+<view class="swiper-tab">  
+    <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">我发出的</view>  
+    <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">我收到的</view>  
+</view>  
+<swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{winHeight - 31}}px" bindchange="bindChange">  
+    <swiper-item>
+    <scroll-view scroll-y="true" style="height: 100%">
+      <view class='cen1'>
+        <image class="userinfo" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+        <text class="userinfo-nickname">{{userInfo.nickname}}共发出</text>
+        <view class='info'>{{zje}}元</view>
+        <view class='info'>{{zgs}}个</view>
+        <view class='my' wx:for="{{list0}}" wx:key="content" wx:for-index="key">
+          <view class='hbxq' data-id='{{item.id}}' bindtap='jumpHbxq'>
+            <view class='tip'>{{item.commandText}}</view>
+            <view class='time'>{{item.createTime}}</view>
+            <view class='number'>
+              <view class='num1'>{{item.fee}}元</view>
+              <view class='num2'>{{item.receiveNumber}}/{{item.number}}</view>            
+            </view>
+          </view>
+        </view>
+        <view class='problem' bindtap='problem'>常见问题</view>
+      </view>  
+      </scroll-view>
+    </swiper-item>  
+    <!-- 我是呵呵-->  
+    <swiper-item>  
+    <scroll-view scroll-y="true" style="height: 100%">
+      <view class='cen1'>
+        <image class="userinfo" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+        <text class="userinfo-nickname">{{userInfo.nickname}}共收到</text>
+        <view class='info'>{{szje}}元</view>
+        <view class='info'>{{szgs}}个</view>
+        <view class='my1' wx:for="{{list1}}" wx:key="content" wx:for-index="key">
+          <view class='hbxq' data-id='{{item.id}}' bindtap='jumpHbxq'>
+            <view class='tip'>{{item.commandText}}</view>
+            <view class='time'>{{item.createTime}}</view>
+            <view class='number'>
+              <view class='num1'>{{item.fee}}元</view>
+              <view class='num2'></view>            
+            </view>
+          </view>
+        </view>
+        <view class='problem' bindtap='problem'>常见问题</view>
+      </view> 
+      </scroll-view> 
+    </swiper-item>     
+</swiper>  

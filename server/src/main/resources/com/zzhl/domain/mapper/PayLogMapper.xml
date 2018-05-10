@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zzhl.domain.mapper.PayLogMapper" >
+  <resultMap id="BaseResultMap" type="com.zzhl.domain.pojo.PayLog" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="uid" property="uid" jdbcType="INTEGER" />
+    <result column="red_envelope_id" property="redEnvelopeId" jdbcType="INTEGER" />
+    <result column="trade_no" property="tradeNo" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="fee" property="fee" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="TINYINT" />
+    <result column="out_trade_no" property="outTradeNo" jdbcType="VARCHAR" />
+    <result column="pay_time" property="payTime" jdbcType="BIGINT" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="note" property="note" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, uid, red_envelope_id, trade_no, description, fee, type, out_trade_no, pay_time, 
+    status, note, create_time
+  </sql>
+
+  <select id="selectByTradeNo" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from pay_log
+    where trade_no = #{tradeNo,jdbcType=VARCHAR}
+    order by id desc
+    limit 1
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from pay_log
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from pay_log
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zzhl.domain.pojo.PayLog" useGeneratedKeys="true" keyProperty="id" >
+    insert into pay_log (uid, red_envelope_id, trade_no, 
+      description, fee, type, 
+      out_trade_no, pay_time, status, 
+      note, create_time)
+    values (#{uid,jdbcType=INTEGER}, #{redEnvelopeId,jdbcType=INTEGER}, #{tradeNo,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{fee,jdbcType=INTEGER}, #{type,jdbcType=TINYINT}, 
+      #{outTradeNo,jdbcType=VARCHAR}, #{payTime,jdbcType=BIGINT}, #{status,jdbcType=TINYINT}, 
+      #{note,jdbcType=VARCHAR}, #{createTime,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zzhl.domain.pojo.PayLog" useGeneratedKeys="true" keyProperty="id" >
+    insert into pay_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="redEnvelopeId != null" >
+        red_envelope_id,
+      </if>
+      <if test="tradeNo != null" >
+        trade_no,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="fee != null" >
+        fee,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="outTradeNo != null" >
+        out_trade_no,
+      </if>
+      <if test="payTime != null" >
+        pay_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="note != null" >
+        note,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uid != null" >
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="redEnvelopeId != null" >
+        #{redEnvelopeId,jdbcType=INTEGER},
+      </if>
+      <if test="tradeNo != null" >
+        #{tradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="fee != null" >
+        #{fee,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="outTradeNo != null" >
+        #{outTradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="payTime != null" >
+        #{payTime,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zzhl.domain.pojo.PayLog" >
+    update pay_log
+    <set >
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="redEnvelopeId != null" >
+        red_envelope_id = #{redEnvelopeId,jdbcType=INTEGER},
+      </if>
+      <if test="tradeNo != null" >
+        trade_no = #{tradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="fee != null" >
+        fee = #{fee,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="outTradeNo != null" >
+        out_trade_no = #{outTradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="payTime != null" >
+        pay_time = #{payTime,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="note != null" >
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zzhl.domain.pojo.PayLog" >
+    update pay_log
+    set uid = #{uid,jdbcType=INTEGER},
+      red_envelope_id = #{redEnvelopeId,jdbcType=INTEGER},
+      trade_no = #{tradeNo,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      fee = #{fee,jdbcType=INTEGER},
+      type = #{type,jdbcType=TINYINT},
+      out_trade_no = #{outTradeNo,jdbcType=VARCHAR},
+      pay_time = #{payTime,jdbcType=BIGINT},
+      status = #{status,jdbcType=TINYINT},
+      note = #{note,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=BIGINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

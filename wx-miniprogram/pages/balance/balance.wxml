@@ -1,0 +1,22 @@
+<!--pages/balance/balance.wxml-->
+<view class='center'>
+  <view class='money'>
+    <view class='moneySz'>{{balance}}</view>
+    <view> 元</view>
+    \n<text class='zhye'>账户余额</text>
+  </view>
+  <view class='content'>
+  <form bindsubmit="formSubmit">
+    <view class='contop'>提现金额</view>
+    <view class='inp'>
+      <label>￥<input type='number' bindinput='getFee' value='{{fee}}'></input></label>
+    </view>
+    <view class='yue'>
+      提现到微信钱包，
+      <view class='entryYE' bindtap='allWithdrawals'>全部提现</view>
+    </view>
+    <button class='qrtx' formType="submit">确认提现</button>     
+  </form>
+    <!-- <button class='fkl' bindtap='home'>发红包</button> -->
+  </view>
+</view>

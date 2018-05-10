@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zzhl.domain.mapper.RedEnvelopeRefundMapper" >
+  <resultMap id="BaseResultMap" type="com.zzhl.domain.pojo.RedEnvelopeRefund" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="red_envelope_id" property="redEnvelopeId" jdbcType="INTEGER" />
+    <result column="fee" property="fee" jdbcType="INTEGER" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="TINYINT" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="create_time" property="createTime" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, red_envelope_id, fee, description, type, status, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from red_envelope_refund
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from red_envelope_refund
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zzhl.domain.pojo.RedEnvelopeRefund" useGeneratedKeys="true" keyProperty="id" >
+    insert into red_envelope_refund (red_envelope_id, fee, description, 
+      type, status, create_time
+      )
+    values (#{redEnvelopeId,jdbcType=INTEGER}, #{fee,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}, 
+      #{type,jdbcType=TINYINT}, #{status,jdbcType=TINYINT}, #{createTime,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zzhl.domain.pojo.RedEnvelopeRefund" useGeneratedKeys="true" keyProperty="id" >
+    insert into red_envelope_refund
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="redEnvelopeId != null" >
+        red_envelope_id,
+      </if>
+      <if test="fee != null" >
+        fee,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="redEnvelopeId != null" >
+        #{redEnvelopeId,jdbcType=INTEGER},
+      </if>
+      <if test="fee != null" >
+        #{fee,jdbcType=INTEGER},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zzhl.domain.pojo.RedEnvelopeRefund" >
+    update red_envelope_refund
+    <set >
+      <if test="redEnvelopeId != null" >
+        red_envelope_id = #{redEnvelopeId,jdbcType=INTEGER},
+      </if>
+      <if test="fee != null" >
+        fee = #{fee,jdbcType=INTEGER},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zzhl.domain.pojo.RedEnvelopeRefund" >
+    update red_envelope_refund
+    set red_envelope_id = #{redEnvelopeId,jdbcType=INTEGER},
+      fee = #{fee,jdbcType=INTEGER},
+      description = #{description,jdbcType=VARCHAR},
+      type = #{type,jdbcType=TINYINT},
+      status = #{status,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=BIGINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
